@@ -4,23 +4,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t huseyinkervan/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t systemsvs/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run huseyinkervan/react-test npm test -- --coverage
+  - docker run systemsvs/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t huseyinkervan/multi-client ./client
-  - docker build -t huseyinkervan/multi-nginx ./nginx
-  - docker build -t huseyinkervan/multi-server ./server
-  - docker build -t huseyinkervan/multi-worker ./worker
+  - docker build -t systemsvs/multi-client ./client
+  - docker build -t systemsvs/multi-nginx ./nginx
+  - docker build -t systemsvs/multi-server ./server
+  - docker build -t systemsvs/multi-worker ./worker
   #login to the docker CLI
   #take those images and push them to docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push huseyinkervan/multi-client
-  - docker push huseyinkervan/multi-nginx
-  - docker push huseyinkervan/multi-server
-  - docker push huseyinkervan/multi-worker
+  - docker push systemsvs/multi-client
+  - docker push systemsvs/multi-nginx
+  - docker push systemsvs/multi-server
+  - docker push systemsvs/multi-worker
 
 
 
