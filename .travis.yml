@@ -1,0 +1,26 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t huseyinkervan/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run huseyinkervan/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t huseyinkervan/multi-client ./client
+  - docker build -t huseyinkervan/multi-nginx ./nginx
+  - docker build -t huseyinkervan/multi-server ./server
+  - docker build -t huseyinkervan/multi-worker ./worker
+  #login to the docker CLI
+  #take those images and push them to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - docker push huseyinkervan/multi-client
+  - docker push huseyinkervan/multi-nginx
+  - docker push huseyinkervan/multi-server
+  - docker push huseyinkervan/multi-worker
+
+
+
