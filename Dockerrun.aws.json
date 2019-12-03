@@ -6,19 +6,26 @@
             "image": "systemsvs/multi-client",
             "hostname": "client",
             "essential": false    
-        }
+        },
         {
             "name": "nginx",
             "image": "systemsvs/multi-nginx",
             "hostname": "nginx",
-            "essential": true   
-        }
+            "essential": true,
+            "portMappings":[
+                {
+                    "hostPort":80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client","server"]   
+        },
         {
-            "name": "api",
+            "name": "server",
             "image": "systemsvs/multi-server",
             "hostname": "api",
             "essential": false   
-        }
+        },
         {
             "name": "worker",
             "image": "systemsvs/multi-worker",
