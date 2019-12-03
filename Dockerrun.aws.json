@@ -1,0 +1,29 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions":[
+        {
+            "name": "client",
+            "image": "systemsvs/multi-client",
+            "hostname": "client",
+            "essential": false    
+        }
+        {
+            "name": "nginx",
+            "image": "systemsvs/multi-nginx",
+            "hostname": "nginx",
+            "essential": true   
+        }
+        {
+            "name": "api",
+            "image": "systemsvs/multi-server",
+            "hostname": "api",
+            "essential": false   
+        }
+        {
+            "name": "worker",
+            "image": "systemsvs/multi-worker",
+            "hostname": "worker",
+            "essential": false   
+        }
+    ]
+}
